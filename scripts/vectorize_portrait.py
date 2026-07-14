@@ -30,8 +30,8 @@ PORTRAIT_PALETTE = {
 }
 
 THEMES = {
-    "terminal_dark.svg": PORTRAIT_PALETTE,
-    "terminal_light.svg": PORTRAIT_PALETTE,
+    "terminal_wide_dark.svg": PORTRAIT_PALETTE,
+    "terminal_wide_light.svg": PORTRAIT_PALETTE,
 }
 
 
@@ -140,14 +140,11 @@ def update_svg(path: Path, image: Image.Image, theme: dict[str, object]) -> None
 
 def main() -> None:
     portrait = Image.open(ROOT / "assets" / "aswath-ascii-portrait.png").convert("L")
-    # Fit the complete 2:3 portrait by height. It becomes 191x287, so the head
-    # and torso touch neither a crop nor blank top/bottom bands. The remaining
-    # four pixels on each side blend into the source's navy background.
+    # Fit the complete 2:3 portrait by height, then widen its 191px content to
+    # the 200px panel. Height, crop, colors, and framing remain unchanged; only
+    # the slight horizontal compression is corrected.
     portrait = ImageOps.contain(portrait, SIZE, Image.Resampling.LANCZOS)
-    canvas = Image.new("L", SIZE, color=18)
-    offset = tuple((outer - inner) // 2 for outer, inner in zip(SIZE, portrait.size))
-    canvas.paste(portrait, offset)
-    portrait = canvas
+    portrait = portrait.resize(SIZE, Image.Resampling.LANCZOS)
     for filename, theme in THEMES.items():
         update_svg(ROOT / filename, portrait, theme)
         print(f"Vectorized portrait into {filename}")
