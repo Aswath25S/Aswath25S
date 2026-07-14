@@ -19,6 +19,7 @@ SVG_NS = "http://www.w3.org/2000/svg"
 NS = f"{{{SVG_NS}}}"
 # The SVG portrait panel is rendered from this canvas with a uniform transform.
 SIZE = (200, 287)
+CONTENT_BOUNDS = (180, 258)
 THRESHOLDS = (95, 180, 235)
 
 # Keep the attached black-ink-on-white artwork in its original polarity in
@@ -29,8 +30,8 @@ PORTRAIT_PALETTE = {
 }
 
 THEMES = {
-    "dark_mode.svg": PORTRAIT_PALETTE,
-    "light_mode.svg": PORTRAIT_PALETTE,
+    "profile_dark.svg": PORTRAIT_PALETTE,
+    "profile_light.svg": PORTRAIT_PALETTE,
 }
 
 
@@ -139,10 +140,10 @@ def update_svg(path: Path, image: Image.Image, theme: dict[str, object]) -> None
 
 def main() -> None:
     portrait = Image.open(ROOT / "assets" / "aswath-original-zoomed.jpg").convert("L")
-    # Fit the wider crop inside the panel without stretching it. Centering the
-    # resulting 200x250 image adds roughly 18px of breathing room above and
-    # below while retaining the exact source proportions.
-    portrait = ImageOps.contain(portrait, SIZE, Image.Resampling.LANCZOS)
+    # Fit the wider crop into a smaller centered box without stretching it.
+    # The resulting 180x225 image is visibly zoomed out and leaves roughly
+    # 31px above and below the source while retaining exact proportions.
+    portrait = ImageOps.contain(portrait, CONTENT_BOUNDS, Image.Resampling.LANCZOS)
     canvas = Image.new("L", SIZE, color=255)
     offset = tuple((outer - inner) // 2 for outer, inner in zip(SIZE, portrait.size))
     canvas.paste(portrait, offset)
