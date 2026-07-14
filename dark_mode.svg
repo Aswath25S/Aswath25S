@@ -36,6 +36,6 @@
   <text class="body text" x="400" y="465">- GitHub Stats <tspan class="muted">───────────────────────────────────────────</tspan></text>
   <text class="small" x="400" y="497">
     <tspan class="muted">. </tspan><tspan class="key">Repos</tspan><tspan class="muted">: </tspan><tspan class="value" id="repo_data">7</tspan><tspan class="muted">  |  </tspan><tspan class="key">Stars</tspan><tspan class="muted">: </tspan><tspan class="value" id="star_data">0</tspan><tspan class="muted">  |  </tspan><tspan class="key">Followers</tspan><tspan class="muted">: </tspan><tspan class="value" id="follower_data">0</tspan>
-    <tspan x="400" dy="23" class="muted">. </tspan><tspan class="key">Contributions this year</tspan><tspan class="muted"> ......................... </tspan><tspan class="value" id="contribution_data">113</tspan>
+    <tspan x="400" dy="23" class="muted">. </tspan><tspan class="key">Contributions this year</tspan><tspan class="muted"> ......................... </tspan><tspan class="value" id="contribution_data">115</tspan>
   </text>
 </svg>
