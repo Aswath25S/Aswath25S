@@ -11,14 +11,16 @@ from __future__ import annotations
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageOps
 
 
 ROOT = Path(__file__).resolve().parents[1]
 SVG_NS = "http://www.w3.org/2000/svg"
 NS = f"{{{SVG_NS}}}"
-SIZE = (200, 300)
-THRESHOLDS = (45, 80, 125)
+# 713:1024 exactly matches the 365:524 SVG portrait panel, so this size and
+# the uniform transform below preserve the original artwork's proportions.
+SIZE = (200, 287)
+THRESHOLDS = (95, 180, 235)
 
 THEMES = {
     "dark_mode.svg": {
@@ -92,9 +94,7 @@ def update_svg(path: Path, image: Image.Image, theme: dict[str, object]) -> None
         {
             "id": "portrait_vectors",
             "clip-path": "url(#portrait-clip)",
-            # The generated portrait reads slightly wide at a 365x524 crop.
-            # A modest vertical stretch restores the source face proportions.
-            "transform": "translate(8 -22) scale(1.825 1.95)",
+            "transform": "translate(8 8) scale(1.825)",
         },
     )
     ET.SubElement(
@@ -125,14 +125,23 @@ def update_svg(path: Path, image: Image.Image, theme: dict[str, object]) -> None
         for child in text_element.iter():
             if child is not text_element and child.tail is not None and child.tail.isspace():
                 child.tail = None
+        if (
+            len(text_element)
+            and text_element.text is None
+            and text_element.get("x") is not None
+        ):
+            # Do not rely on the inherited current text position for first rows.
+            text_element[0].set("x", text_element.get("x"))
 
     ET.register_namespace("", SVG_NS)
     tree.write(path, encoding="utf-8", xml_declaration=True)
 
 
 def main() -> None:
-    portrait = Image.open(ROOT / "assets" / "aswath-ascii.jpg").convert("L")
-    portrait = portrait.resize(SIZE, Image.Resampling.LANCZOS)
+    portrait = Image.open(ROOT / "assets" / "aswath-original-crop.jpg").convert("L")
+    # The source is black ink on white paper; invert it into terminal light on
+    # dark before quantizing the three SVG vector-density layers.
+    portrait = ImageOps.invert(portrait).resize(SIZE, Image.Resampling.LANCZOS)
     for filename, theme in THEMES.items():
         update_svg(ROOT / filename, portrait, theme)
         print(f"Vectorized portrait into {filename}")
