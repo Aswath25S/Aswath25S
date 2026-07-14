@@ -4,18 +4,18 @@
   <desc id="desc">An ASCII portrait of Aswath beside his projects, interests, links, and live GitHub statistics.</desc>
   <defs>
     <filter id="invert" color-interpolation-filters="sRGB">
-      <feColorMatrix type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0"/>
+      <feColorMatrix type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0" />
     </filter>
   </defs>
   <style>
     .bg{fill:#f6f8fa}.border{fill:none;stroke:#d0d7de;stroke-width:2}.text{fill:#24292f}.muted{fill:#57606a}.key{fill:#bc4c00}.value{fill:#0969da}.green{fill:#1a7f37}
     text{font-family:Consolas,"SFMono-Regular",Menlo,"Liberation Mono",monospace;white-space:pre}.head{font-size:19px;font-weight:700}.body{font-size:15px}.small{font-size:13px}
   </style>
-  <rect class="bg" width="1000" height="540" rx="15"/>
-  <rect class="border" x="1" y="1" width="998" height="538" rx="14"/>
+  <rect class="bg" width="1000" height="540" rx="15" />
+  <rect class="border" x="1" y="1" width="998" height="538" rx="14" />
 
-  <image x="8" y="8" width="365" height="524" preserveAspectRatio="xMidYMid slice" filter="url(#invert)" href="https://raw.githubusercontent.com/Aswath25S/Aswath25S/main/assets/aswath-ascii.jpg"/>
-  <rect x="8" y="8" width="365" height="524" fill="none" stroke="#f6f8fa" stroke-width="10" rx="12"/>
+  <image x="8" y="8" width="365" height="524" preserveAspectRatio="xMidYMid slice" filter="url(#invert)" href="https://raw.githubusercontent.com/Aswath25S/Aswath25S/main/assets/aswath-ascii.jpg" />
+  <rect x="8" y="8" width="365" height="524" fill="none" stroke="#f6f8fa" stroke-width="10" rx="12" />
 
   <text class="head text" x="400" y="35">aswath<tspan class="muted">@github</tspan></text>
   <text class="muted body" x="400" y="58">──────────────────────────────────────────────────────────</text>
@@ -44,6 +44,6 @@
   <text class="body text" x="400" y="465">- GitHub Stats <tspan class="muted">───────────────────────────────────────────</tspan></text>
   <text class="small" x="400" y="497">
     <tspan class="muted">. </tspan><tspan class="key">Repos</tspan><tspan class="muted">: </tspan><tspan class="value" id="repo_data">7</tspan><tspan class="muted">  |  </tspan><tspan class="key">Stars</tspan><tspan class="muted">: </tspan><tspan class="value" id="star_data">0</tspan><tspan class="muted">  |  </tspan><tspan class="key">Followers</tspan><tspan class="muted">: </tspan><tspan class="value" id="follower_data">0</tspan>
-    <tspan x="400" dy="23" class="muted">. </tspan><tspan class="key">Contributions this year</tspan><tspan class="muted"> ......................... </tspan><tspan class="value" id="contribution_data">108</tspan>
+    <tspan x="400" dy="23" class="muted">. </tspan><tspan class="key">Contributions this year</tspan><tspan class="muted"> ......................... </tspan><tspan class="value" id="contribution_data">111</tspan>
   </text>
 </svg>

@@ -6,11 +6,11 @@
     .bg{fill:#161b22}.border{fill:none;stroke:#30363d;stroke-width:2}.text{fill:#c9d1d9}.muted{fill:#6e7681}.key{fill:#ffa657}.value{fill:#a5d6ff}.green{fill:#3fb950}
     text{font-family:Consolas,"SFMono-Regular",Menlo,"Liberation Mono",monospace;white-space:pre}.head{font-size:19px;font-weight:700}.body{font-size:15px}.small{font-size:13px}
   </style>
-  <rect class="bg" width="1000" height="540" rx="15"/>
-  <rect class="border" x="1" y="1" width="998" height="538" rx="14"/>
+  <rect class="bg" width="1000" height="540" rx="15" />
+  <rect class="border" x="1" y="1" width="998" height="538" rx="14" />
 
-  <image x="8" y="8" width="365" height="524" preserveAspectRatio="xMidYMid slice" href="https://raw.githubusercontent.com/Aswath25S/Aswath25S/main/assets/aswath-ascii.jpg"/>
-  <rect x="8" y="8" width="365" height="524" fill="none" stroke="#161b22" stroke-width="10" rx="12"/>
+  <image x="8" y="8" width="365" height="524" preserveAspectRatio="xMidYMid slice" href="https://raw.githubusercontent.com/Aswath25S/Aswath25S/main/assets/aswath-ascii.jpg" />
+  <rect x="8" y="8" width="365" height="524" fill="none" stroke="#161b22" stroke-width="10" rx="12" />
 
   <text class="head text" x="400" y="35">aswath<tspan class="muted">@github</tspan></text>
   <text class="muted body" x="400" y="58">──────────────────────────────────────────────────────────</text>
@@ -39,6 +39,6 @@
   <text class="body text" x="400" y="465">- GitHub Stats <tspan class="muted">───────────────────────────────────────────</tspan></text>
   <text class="small" x="400" y="497">
     <tspan class="muted">. </tspan><tspan class="key">Repos</tspan><tspan class="muted">: </tspan><tspan class="value" id="repo_data">7</tspan><tspan class="muted">  |  </tspan><tspan class="key">Stars</tspan><tspan class="muted">: </tspan><tspan class="value" id="star_data">0</tspan><tspan class="muted">  |  </tspan><tspan class="key">Followers</tspan><tspan class="muted">: </tspan><tspan class="value" id="follower_data">0</tspan>
-    <tspan x="400" dy="23" class="muted">. </tspan><tspan class="key">Contributions this year</tspan><tspan class="muted"> ......................... </tspan><tspan class="value" id="contribution_data">108</tspan>
+    <tspan x="400" dy="23" class="muted">. </tspan><tspan class="key">Contributions this year</tspan><tspan class="muted"> ......................... </tspan><tspan class="value" id="contribution_data">111</tspan>
   </text>
 </svg>
