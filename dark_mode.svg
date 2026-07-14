@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="540" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
   <title id="title">Aswath's GitHub profile card</title>
   <desc id="desc">A terminal-inspired introduction with projects, skills, links, and GitHub statistics.</desc>
@@ -6,8 +6,8 @@
     .bg{fill:#161b22}.border{fill:none;stroke:#30363d;stroke-width:2}.muted{fill:#7d8590}.text{fill:#c9d1d9}.key{fill:#ffa657}.value{fill:#a5d6ff}.green{fill:#3fb950}
     text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;white-space:pre}.small{font-size:15px}.stats{font-size:13px}.body{font-size:17px}.head{font-size:20px;font-weight:700}.logo{font-size:18px;font-weight:700}
   </style>
-  <rect class="bg" width="1000" height="540" rx="16"/>
-  <rect class="border" x="1" y="1" width="998" height="538" rx="15"/>
+  <rect class="bg" width="1000" height="540" rx="16" />
+  <rect class="border" x="1" y="1" width="998" height="538" rx="15" />
 
   <text class="logo value" x="42" y="75">
     <tspan x="42" dy="0">     _                        _   _     </tspan>
@@ -30,7 +30,7 @@
     <tspan x="50" dy="0">github.com/Aswath25S</tspan>
   </text>
 
-  <line x1="455" y1="35" x2="455" y2="505" stroke="#30363d"/>
+  <line x1="455" y1="35" x2="455" y2="505" stroke="#30363d" />
   <text class="head text" x="495" y="55">aswath<tspan class="muted">@github</tspan></text>
   <text class="muted small" x="495" y="82">────────────────────────────────────────────────</text>
 
@@ -55,6 +55,6 @@
 
   <text class="body text" x="495" y="478">- GitHub stats <tspan class="muted">───────────────────────────────</tspan></text>
   <text class="stats" x="495" y="510">
-    <tspan class="key">Repos</tspan><tspan class="muted">: </tspan><tspan class="value" id="repo_data">7</tspan><tspan class="muted"> · </tspan><tspan class="key">Stars</tspan><tspan class="muted">: </tspan><tspan class="value" id="star_data">0</tspan><tspan class="muted"> · </tspan><tspan class="key">Followers</tspan><tspan class="muted">: </tspan><tspan class="value" id="follower_data">0</tspan><tspan class="muted"> · </tspan><tspan class="key">Contributions</tspan><tspan class="muted">: </tspan><tspan class="value" id="contribution_data">144</tspan>
+    <tspan class="key">Repos</tspan><tspan class="muted">: </tspan><tspan class="value" id="repo_data">7</tspan><tspan class="muted"> · </tspan><tspan class="key">Stars</tspan><tspan class="muted">: </tspan><tspan class="value" id="star_data">0</tspan><tspan class="muted"> · </tspan><tspan class="key">Followers</tspan><tspan class="muted">: </tspan><tspan class="value" id="follower_data">0</tspan><tspan class="muted"> · </tspan><tspan class="key">Contributions</tspan><tspan class="muted">: </tspan><tspan class="value" id="contribution_data">108</tspan>
   </text>
 </svg>
