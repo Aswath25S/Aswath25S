@@ -105,7 +105,7 @@ def update_svg(path: Path, stats: dict[str, int]) -> None:
 
 def main() -> None:
     stats = fetch_stats()
-    for filename in ("profile_dark.svg", "profile_light.svg"):
+    for filename in ("terminal_dark.svg", "terminal_light.svg"):
         update_svg(ROOT / filename, stats)
     print("Updated profile stats:", ", ".join(f"{key}={value:,}" for key, value in stats.items()))
 

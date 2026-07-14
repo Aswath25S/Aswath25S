@@ -19,19 +19,19 @@ SVG_NS = "http://www.w3.org/2000/svg"
 NS = f"{{{SVG_NS}}}"
 # The SVG portrait panel is rendered from this canvas with a uniform transform.
 SIZE = (200, 287)
-CONTENT_BOUNDS = (180, 258)
-THRESHOLDS = (95, 180, 235)
+THRESHOLDS = (45, 130, 210)
 
-# Keep the attached black-ink-on-white artwork in its original polarity in
-# both GitHub themes. Only the surrounding card changes with the theme.
+# The reference portrait is pale ASCII on a deep navy field. Keep that strong
+# contrast in both GitHub themes so the image reads as a deliberate terminal
+# portrait instead of a washed-out paper scan.
 PORTRAIT_PALETTE = {
-    "background": "#f6f8fa",
-    "layers": ("#d0d7de", "#8c959f", "#24292f"),
+    "background": "#0e131c",
+    "layers": ("#303945", "#8b949e", "#f0f6fc"),
 }
 
 THEMES = {
-    "profile_dark.svg": PORTRAIT_PALETTE,
-    "profile_light.svg": PORTRAIT_PALETTE,
+    "terminal_dark.svg": PORTRAIT_PALETTE,
+    "terminal_light.svg": PORTRAIT_PALETTE,
 }
 
 
@@ -139,18 +139,15 @@ def update_svg(path: Path, image: Image.Image, theme: dict[str, object]) -> None
 
 
 def main() -> None:
-    portrait = Image.open(ROOT / "assets" / "aswath-original-zoomed.jpg").convert("L")
-    # Fit the wider crop into a smaller centered box without stretching it.
-    # The resulting 180x225 image is visibly zoomed out and leaves roughly
-    # 31px above and below the source while retaining exact proportions.
-    portrait = ImageOps.contain(portrait, CONTENT_BOUNDS, Image.Resampling.LANCZOS)
-    canvas = Image.new("L", SIZE, color=255)
+    portrait = Image.open(ROOT / "assets" / "aswath-ascii-portrait.png").convert("L")
+    # Fit the complete 2:3 portrait by height. It becomes 191x287, so the head
+    # and torso touch neither a crop nor blank top/bottom bands. The remaining
+    # four pixels on each side blend into the source's navy background.
+    portrait = ImageOps.contain(portrait, SIZE, Image.Resampling.LANCZOS)
+    canvas = Image.new("L", SIZE, color=18)
     offset = tuple((outer - inner) // 2 for outer, inner in zip(SIZE, portrait.size))
     canvas.paste(portrait, offset)
-
-    # Invert only the pixel mask used to select the original dark ink. The SVG
-    # palette above draws those selected pixels dark on a light background.
-    portrait = ImageOps.invert(canvas)
+    portrait = canvas
     for filename, theme in THEMES.items():
         update_svg(ROOT / filename, portrait, theme)
         print(f"Vectorized portrait into {filename}")
