@@ -17,20 +17,20 @@ from PIL import Image, ImageOps
 ROOT = Path(__file__).resolve().parents[1]
 SVG_NS = "http://www.w3.org/2000/svg"
 NS = f"{{{SVG_NS}}}"
-# 713:1024 exactly matches the 365:524 SVG portrait panel, so this size and
-# the uniform transform below preserve the original artwork's proportions.
+# The SVG portrait panel is rendered from this canvas with a uniform transform.
 SIZE = (200, 287)
 THRESHOLDS = (95, 180, 235)
 
+# Keep the attached black-ink-on-white artwork in its original polarity in
+# both GitHub themes. Only the surrounding card changes with the theme.
+PORTRAIT_PALETTE = {
+    "background": "#f6f8fa",
+    "layers": ("#d0d7de", "#8c959f", "#24292f"),
+}
+
 THEMES = {
-    "dark_mode.svg": {
-        "background": "#0d1117",
-        "layers": ("#30363d", "#6e7681", "#c9d1d9"),
-    },
-    "light_mode.svg": {
-        "background": "#f6f8fa",
-        "layers": ("#d0d7de", "#8c959f", "#24292f"),
-    },
+    "dark_mode.svg": PORTRAIT_PALETTE,
+    "light_mode.svg": PORTRAIT_PALETTE,
 }
 
 
@@ -100,7 +100,7 @@ def update_svg(path: Path, image: Image.Image, theme: dict[str, object]) -> None
     ET.SubElement(
         portrait,
         f"{NS}rect",
-        {"width": "200", "height": "300", "fill": str(theme["background"])},
+        {"width": "200", "height": "287", "fill": str(theme["background"])},
     )
     for threshold, color in zip(THRESHOLDS, theme["layers"], strict=True):
         ET.SubElement(
@@ -138,10 +138,18 @@ def update_svg(path: Path, image: Image.Image, theme: dict[str, object]) -> None
 
 
 def main() -> None:
-    portrait = Image.open(ROOT / "assets" / "aswath-original-crop.jpg").convert("L")
-    # The source is black ink on white paper; invert it into terminal light on
-    # dark before quantizing the three SVG vector-density layers.
-    portrait = ImageOps.invert(portrait).resize(SIZE, Image.Resampling.LANCZOS)
+    portrait = Image.open(ROOT / "assets" / "aswath-original-zoomed.jpg").convert("L")
+    # Fit the wider crop inside the panel without stretching it. Centering the
+    # resulting 200x250 image adds roughly 18px of breathing room above and
+    # below while retaining the exact source proportions.
+    portrait = ImageOps.contain(portrait, SIZE, Image.Resampling.LANCZOS)
+    canvas = Image.new("L", SIZE, color=255)
+    offset = tuple((outer - inner) // 2 for outer, inner in zip(SIZE, portrait.size))
+    canvas.paste(portrait, offset)
+
+    # Invert only the pixel mask used to select the original dark ink. The SVG
+    # palette above draws those selected pixels dark on a light background.
+    portrait = ImageOps.invert(canvas)
     for filename, theme in THEMES.items():
         update_svg(ROOT / filename, portrait, theme)
         print(f"Vectorized portrait into {filename}")
