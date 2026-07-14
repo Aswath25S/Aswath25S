@@ -92,7 +92,9 @@ def update_svg(path: Path, image: Image.Image, theme: dict[str, object]) -> None
         {
             "id": "portrait_vectors",
             "clip-path": "url(#portrait-clip)",
-            "transform": "translate(8 -4) scale(1.825)",
+            # The generated portrait reads slightly wide at a 365x524 crop.
+            # A modest vertical stretch restores the source face proportions.
+            "transform": "translate(8 -22) scale(1.825 1.95)",
         },
     )
     ET.SubElement(
@@ -113,6 +115,16 @@ def update_svg(path: Path, image: Image.Image, theme: dict[str, object]) -> None
         if child.tag == f"{NS}rect" and child.get("class") == "border"
     )
     root.insert(border_index + 1, portrait)
+
+    # With `white-space: pre`, pretty-print indentation before a text element's
+    # first tspan becomes visible as an unwanted leading gap. Strip formatting
+    # whitespace inside text blocks while preserving intentional tspan text.
+    for text_element in root.iter(f"{NS}text"):
+        if text_element.text is not None and text_element.text.isspace():
+            text_element.text = None
+        for child in text_element.iter():
+            if child is not text_element and child.tail is not None and child.tail.isspace():
+                child.tail = None
 
     ET.register_namespace("", SVG_NS)
     tree.write(path, encoding="utf-8", xml_declaration=True)
