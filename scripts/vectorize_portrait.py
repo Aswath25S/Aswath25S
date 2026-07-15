@@ -30,8 +30,8 @@ PORTRAIT_PALETTE = {
 }
 
 THEMES = {
-    "terminal_wide_dark.svg": PORTRAIT_PALETTE,
-    "terminal_wide_light.svg": PORTRAIT_PALETTE,
+    "profile_card_dark.svg": PORTRAIT_PALETTE,
+    "profile_card_light.svg": PORTRAIT_PALETTE,
 }
 
 
